@@ -269,132 +269,205 @@
             cursor: pointer;
         }
 
-        /* Hero */
-        .hero {
-            padding: 180px 0 100px;
-            text-align: center;
-            position: relative;
-            background: linear-gradient(180deg, #FAFAF8 0%, #F5F3EF 50%, #EDEAE5 100%);
-            overflow: hidden;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -120px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 700px;
-            height: 700px;
-            background: radial-gradient(circle, rgba(201, 168, 76, 0.06) 0%, transparent 70%);
-            pointer-events: none;
-            animation: breathe 7s ease-in-out infinite;
-        }
-        @keyframes breathe {
-            0%,
-            100% {
-                transform: translateX(-50%) scale(1);
-                opacity: 0.5;
-            }
-            50% {
-                transform: translateX(-50%) scale(1.25);
-                opacity: 1;
-            }
-        }
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: #FFFFFF;
-            padding: 10px 26px;
-            border-radius: 50px;
-            font-weight: 500;
-            margin-bottom: 24px;
-            border: 1px solid var(--border-light);
-            box-shadow: var(--shadow-soft);
-            animation: fadeInDown 0.8s ease-out;
-            color: var(--text-charcoal);
-        }
-        .hero-badge .stars {
-            color: #C9A84C;
-            letter-spacing: 2px;
-        }
-        .hero-badge .divider {
-            width: 1px;
-            height: 14px;
-            background: #ddd;
-        }
-        .hero h1 {
-            font-size: clamp(3.2rem, 7vw, 5.5rem);
-            font-weight: 900;
-            color: #1A1A18;
-            margin-bottom: 10px;
-            line-height: 1.08;
-            animation: fadeInUp 0.8s ease-out;
-            letter-spacing: -1px;
-        }
-        .hero h1 .gold {
-            color: #C9A84C;
-        }
-        .hero-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-mid);
-            margin-bottom: 8px;
-            animation: fadeInUp 0.8s ease-out 0.12s both;
-            font-weight: 400;
-        }
-        .hero-desc {
-            max-width: 600px;
-            margin: 22px auto 38px;
-            color: var(--text-light);
-            font-size: 1.05rem;
-            animation: fadeInUp 0.8s ease-out 0.24s both;
-            font-weight: 400;
-            line-height: 1.8;
-        }
-        .btn-group {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            justify-content: center;
-            animation: fadeInUp 0.8s ease-out 0.36s both;
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(35px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-25px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .open-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            background: rgba(37, 211, 102, 0.1);
-            color: #25D366;
-            padding: 5px 14px;
-            border-radius: 50px;
-            font-size: 0.78rem;
-            font-weight: 600;
-            margin-left: 8px;
-        }
+       /* ============ HERO SECTION WITH BACKGROUND IMAGE ============ */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    
+    /* ===== YAHAN APNI IMAGE DAALO ===== */
+    background-image: url('YOUR_IMAGE_NAME.jpg');  /* ← APNI IMAGE KA NAAM/PATH YAHAN */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;  /* Parallax effect */
+    overflow: hidden;
+}
 
+/* Dark overlay - taaki text readable rahe */
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.65) 0%,
+        rgba(0, 0, 0, 0.4) 50%,
+        rgba(0, 0, 0, 0.7) 100%
+    );
+    z-index: 1;
+}
+
+/* Subtle grain texture (optional - premium feel) */
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("C:\\Users\\adim\\Desktop\\FLC Gym\\Screenshot 2026-06-22 230145.png");
+    background-size: cover;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    padding: 120px 0 80px;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* Badge - glassmorphism effect */
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 10px 26px;
+    border-radius: 50px;
+    font-weight: 500;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    animation: fadeInDown 0.8s ease-out;
+    color: #FFFFFF;
+}
+
+.hero-badge .stars {
+    color: #FCD34D;
+    letter-spacing: 2px;
+}
+
+.hero-badge .divider {
+    width: 1px;
+    height: 14px;
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* Main Heading */
+.hero h1 {
+    font-size: clamp(3.2rem, 7vw, 5.5rem);
+    font-weight: 900;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+    line-height: 1.08;
+    animation: fadeInUp 0.8s ease-out;
+    letter-spacing: -1px;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.hero h1 .gold {
+    color: #FCD34D;
+}
+
+/* Subtitle */
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 8px;
+    animation: fadeInUp 0.8s ease-out 0.12s both;
+    font-weight: 400;
+}
+
+/* Description */
+.hero-desc {
+    max-width: 600px;
+    margin: 22px auto 38px;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1.05rem;
+    animation: fadeInUp 0.8s ease-out 0.24s both;
+    font-weight: 400;
+    line-height: 1.8;
+}
+
+/* Button Group */
+.btn-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeInUp 0.8s ease-out 0.36s both;
+}
+
+/* WhatsApp Button Color Fix */
+.btn-outline-green {
+    border: 1.5px solid #25D366;
+    color: #25D366;
+    background: rgba(37, 211, 102, 0.05);
+}
+.btn-outline-green:hover {
+    background: #25D366;
+    color: #fff;
+}
+
+/* Open/Closed Badge */
+.open-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(37, 211, 102, 0.2);
+    color: #25D366;
+    padding: 5px 14px;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-left: 8px;
+    border: 1px solid rgba(37, 211, 102, 0.3);
+}
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============ MOBILE RESPONSIVE ============ */
+@media (max-width: 768px) {
+    .hero {
+        background-attachment: scroll;  /* Mobile pe parallax off */
+        min-height: auto;
+    }
+    .hero-content {
+        padding: 150px 0 60px;
+    }
+    .hero h1 {
+        font-size: 2.6rem;
+    }
+    .hero-badge {
+        padding: 8px 18px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    .hero-content {
+        padding: 130px 0 40px;
+    }
+}
         /* Trust Bar */
         .trust-bar {
             background: #FFFFFF;
