@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Fitness Life Club - Crossings Republik, Ghaziabad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-warm: #F5F3EF;
+            --bg-white: #FFFFFF;
+            --bg-card: #FAFAF8;
+            --gold: #C9A84C;
+            --gold-dark: #B8922E;
+            --text-dark: #1A1A18;
+            --text-mid: #6B6B67;
+            --text-light: #8F8F8A;
+            --border: rgba(0, 0, 0, 0.06);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            --shadow-hover: 0 12px 35px rgba(0, 0, 0, 0.1);
+            --radius: 16px;
+            --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-warm);
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ============ NAVBAR ============ */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 0;
+        }
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #1A1A18;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+        .logo span {
+            color: #C9A84C;
+        }
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: #3D3D3A;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #C9A84C;
+        }
+        .btn-back {
+            background: linear-gradient(135deg, #C9A84C, #B8922E);
+            color: #fff !important;
+            padding: 10px 22px !important;
+            border-radius: 50px !important;
+            font-weight: 600 !important;
+            font-size: 0.85rem !important;
+        }
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            color: #1A1A18;
+            cursor: pointer;
+        }
+
+        /* ============ PAGE HEADER ============ */
+        .page-header {
+            text-align: center;
+            padding: 60px 0 40px;
+        }
+        .page-header .label {
+            display: inline-block;
+            color: #C9A84C;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+        }
+        .page-header h1 {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            color: #1A1A18;
+            margin-bottom: 8px;
+        }
+        .page-header .subtitle {
+            color: var(--text-mid);
+            font-size: 1rem;
+        }
+
+        /* ============ FILTER BUTTONS ============ */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        .filter-btn {
+            padding: 10px 22px;
+            border-radius: 50px;
+            border: 1.5px solid rgba(0, 0, 0, 0.12);
+            background: #fff;
+            color: #3D3D3A;
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        .filter-btn:hover {
+            border-color: #C9A84C;
+            color: #C9A84C;
+        }
+        .filter-btn.active {
+            background: #C9A84C;
+            color: #fff;
+            border-color: #C9A84C;
+        }
+
+        /* ============ GALLERY GRID ============ */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding-bottom: 60px;
+        }
+
+        /* ============ GALLERY ITEM ============ */
+        .gallery-item {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+            background: #e0e0e0;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .gallery-item:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-4px);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        /* ============ OVERLAY WITH ANIMATION ============ */
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                transparent 0%,
+                transparent 40%,
+                rgba(0, 0, 0, 0.45) 70%,
+                rgba(0, 0, 0, 0.7) 100%
+            );
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 20px;
+            /* PC: hidden by default, show on hover */
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        /* PC par hover pe dikhega */
+        @media (hover: hover) and (pointer: fine) {
+            .gallery-item:hover .gallery-overlay {
+                opacity: 1;
+            }
+        }
+
+        /* MOBILE: hamesha dikhega */
+        @media (hover: none) and (pointer: coarse), (max-width: 768px) {
+            .gallery-overlay {
+                opacity: 1;
+                background: linear-gradient(
+                    180deg,
+                    transparent 0%,
+                    transparent 30%,
+                    rgba(0, 0, 0, 0.35) 60%,
+                    rgba(0, 0, 0, 0.6) 100%
+                );
+            }
+        }
+
+        .overlay-content {
+            text-align: center;
+            transform: translateY(10px);
+            transition: transform 0.4s ease;
+        }
+
+        /* PC hover pe smooth slide-up */
+        @media (hover: hover) and (pointer: fine) {
+            .gallery-item:hover .overlay-content {
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile: hamesha visible position */
+        @media (hover: none) and (pointer: coarse), (max-width: 768px) {
+            .overlay-content {
+                transform: translateY(0);
+            }
+        }
+
+        .overlay-content .category {
+            display: inline-block;
+            background: #C9A84C;
+            color: #fff;
+            padding: 5px 14px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .overlay-content h3 {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            margin: 4px 0 0;
+        }
+
+        /* ============ LIGHTBOX ============ */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.94);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .lightbox img {
+            max-width: 92%;
+            max-height: 88vh;
+            border-radius: 12px;
+            border: 2px solid rgba(201, 168, 76, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.3s ease;
+        }
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 28px;
+            color: #fff;
+            font-size: 2.2rem;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            z-index: 2;
+        }
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.2s;
+            z-index: 2;
+        }
+        .lightbox-nav:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+        .lightbox-prev {
+            left: 20px;
+        }
+        .lightbox-next {
+            right: 20px;
+        }
+        .lightbox-caption {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            z-index: 2;
+        }
+
+        /* ============ FOOTER ============ */
+        .gallery-footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        .gallery-footer a {
+            color: #C9A84C;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hamburger {
+                display: block;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 10px;
+            }
+            .gallery-item {
+                border-radius: 12px;
+            }
+            .filter-btn {
+                padding: 8px 16px;
+                font-size: 0.75rem;
+            }
+            .overlay-content h3 {
+                font-size: 0.9rem;
+            }
+            .overlay-content .category {
+                font-size: 0.6rem;
+                padding: 4px 10px;
+            }
+            .lightbox-nav {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+            .lightbox-prev {
+                left: 10px;
+            }
+            .lightbox-next {
+                right: 10px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            .overlay-content h3 {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============ NAVBAR ============ -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">FL<span>C</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#membership">Membership</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Home</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- ============ PAGE HEADER ============ -->
+    <header class="page-header">
+        <div class="container">
+            <span class="label">Our Facility</span>
+            <h1>Photo Gallery</h1>
+            <p class="subtitle">Take a virtual tour of our 5000+ sq ft premium gym</p>
+        </div>
+    </header>
+
+    <!-- ============ FILTER BUTTONS ============ -->
+    <div class="container">
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All Photos</button>
+            <button class="filter-btn" data-filter="equipment">Equipment</button>
+            <button class="filter-btn" data-filter="classes">Classes</button>
+            <button class="filter-btn" data-filter="interior">Interior</button>
+            <button class="filter-btn" data-filter="training">Training</button>
+            <button class="filter-btn" data-filter="cardio">Cardio</button>
+            <button class="filter-btn" data-filter="weights">Weights</button>
+        </div>
+    </div>
+
+    <!-- ============ GALLERY GRID ============ -->
+    <div class="container">
+        <div class="gallery-grid" id="galleryGrid">
+
+            <!-- 1. Equipment -->
+            <div class="gallery-item" data-category="equipment" onclick="openLightbox(0)">
+                <img src="C:\Users\adim\Desktop\FLC Gym\Screenshot 2026-06-22 230044.png" alt="Premium Gym Equipment" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="overlay-content">
+                        <span class="category">Equipment</span>
+                        <h3>Premium Machines</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Equipment -->
+            <div class="gallery-item" data-category="equipment" onclick="openLightbox(1)">
+                <img src="C:\Users\adim\Desktop\FLC Gym\Screenshot 2026-06-22 225952.png" alt="Cardio Machines" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="overlay-content">
+                        <span class="category">Equipment</span>
+                        <h3>Cardio Zone</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Classes -->
+            <div class="gallery-item" data-category="classes" onclick="openLightbox(2)">
+                <img src="C:\Users\adim\Desktop\FLC Gym\Screenshot 2026-06-22 230051.png" alt="Group Fitness Classes" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="overlay-content">
+                        <span class="category">Classes</span>
+                        <h3>Clean machines</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Classes -->
+            <div class="gallery-item" data-category="classes" onclick="openLightbox(3)">
+                <img src="C:\Users\adim\Desktop\FLC Gym\Screenshot 2026-06-22 230111.png" alt="Yoga Class" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="overlay-content">
+                        <span class="category">Classes</span>
+                        <h3>Yoga Sessions</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Interior -->
+            <div class="gallery-item" data-category="interior" onclick="openLightbox(4)">
+                <img src="C:\Users\adim\Desktop\FLC Gym\Screenshot 2026-06-22 230145.png" alt="Luxury Gym Interior" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="overlay-content">
+                        <span class="category">Interior</span>
+                        <h3>Main Floor</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. Interior -->
+            <div class="gallery-item" data-category="interior" onclick="openLightbox(5)">
+                <img src="C:\Users\adim\Desktop\FLC Gym\Screenshot 2026-06-22 230037.png" alt="Reception Area" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="overlay-content">
+                        <span class="category">Interior</span>
+                        <h3>Happy Clients</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. Training -->
+            <div class="gallery-item" data-category="training" onclick="openLightbox(6)">
+                <img src="C:\Users\adim\Desktop\FLC Gym\Screenshot 2026-06-22 230030.png" alt="Personal Training" loading="lazy">
+                <div class="gallery-overlay">
+                    <div class="overlay-content">
+                        <span class="category">Training</span>
+                        <h3>Personal Coaching</h3>
+                    </div>
+                </div>
+            </div>
+
+          
+
+    <!-- ============ LIGHTBOX ============ -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)"><i class="fas fa-chevron-left"></i></button>
+        <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)"><i class="fas fa-chevron-right"></i></button>
+        <img src="" alt="Gallery Image" id="lightboxImg">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+
+    <!-- ============ FOOTER ============ -->
+    <div class="gallery-footer">
+        <div class="container">
+            <p><a href="index.html"><i class="fas fa-arrow-left"></i> Back to Home</a> &nbsp;|&nbsp; Want to see more? <a href="https://wa.me/919818421746?text=Gallery%20Visit%20Request">Book a Free Tour</a></p>
+        </div>
+    </div>
+
+    <script>
+        // ============ GALLERY DATA ============
+        const galleryImages = [
+            { src: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&h=900&fit=crop', caption: 'Premium Machines - Equipment',
+                category: 'equipment' },
+            { src: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=1200&h=900&fit=crop', caption: 'Cardio Zone - Equipment',
+                category: 'equipment' },
+            { src: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1200&h=900&fit=crop', caption: 'Group Sessions - Classes',
+                category: 'classes' },
+            { src: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1200&h=900&fit=crop', caption: 'Yoga Sessions - Classes',
+                category: 'classes' },
+            { src: 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=1200&h=900&fit=crop', caption: 'Main Floor - Interior',
+                category: 'interior' },
+            { src: 'https://images.unsplash.com/photo-1579758629938-03607ccdbaba?w=1200&h=900&fit=crop', caption: 'Reception - Interior',
+                category: 'interior' },
+            { src: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=1200&h=900&fit=crop', caption: 'Personal Coaching - Training',
+                category: 'training' },
+            { src: 'https://images.unsplash.com/photo-1580261450046-d0a30080dc9b?w=1200&h=900&fit=crop', caption: 'Expert Guidance - Training',
+                category: 'training' },
+            { src: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=1200&h=900&fit=crop', caption: 'Treadmills - Cardio',
+                category: 'cardio' },
+            { src: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200&h=900&fit=crop', caption: 'Cycling Zone - Cardio',
+                category: 'cardio' },
+            { src: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1200&h=900&fit=crop', caption: 'Free Weights - Weights',
+                category: 'weights' },
+            { src: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=1200&h=900&fit=crop', caption: 'Strength Zone - Weights',
+                category: 'weights' },
+        ];
+
+        let currentIndex = 0;
+
+        // ============ LIGHTBOX FUNCTIONS ============
+        function openLightbox(index) {
+            currentIndex = index;
+            const img = document.getElementById('lightboxImg');
+            const caption = document.getElementById('lightboxCaption');
+            img.src = galleryImages[index].src;
+            caption.textContent = galleryImages[index].caption;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function navigateLightbox(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) currentIndex = galleryImages.length - 1;
+            if (currentIndex >= galleryImages.length) currentIndex = 0;
+            const img = document.getElementById('lightboxImg');
+            const caption = document.getElementById('lightboxCaption');
+            img.src = galleryImages[currentIndex].src;
+            caption.textContent = galleryImages[currentIndex].caption;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') navigateLightbox(-1);
+            if (e.key === 'ArrowRight') navigateLightbox(1);
+        });
+
+        // Close lightbox on background click
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) closeLightbox();
+        });
+
+        // Touch swipe for mobile
+        let touchStartX = 0;
+        document.getElementById('lightbox').addEventListener('touchstart', function(e) {
+            touchStartX = e.touches[0].clientX;
+        });
+        document.getElementById('lightbox').addEventListener('touchend', function(e) {
+            const touchEndX = e.changedTouches[0].clientX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                navigateLightbox(diff > 0 ? 1 : -1);
+            }
+        });
+
+        // ============ FILTER FUNCTIONALITY ============
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+
+                const filter = this.getAttribute('data-filter');
+
+                galleryItems.forEach((item, index) => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                        item.style.animation = 'fadeInScale 0.4s ease forwards';
+                        item.style.animationDelay = (index * 0.05) + 's';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Add fade-in animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInScale {
+                from { opacity: 0; transform: scale(0.9); }
+                to { opacity: 1; transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // ============ MOBILE MENU ============
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', function() {
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '60px';
+                navLinks.style.left = '0';
+                navLinks.style.width = '100%';
+                navLinks.style.background = '#fff';
+                navLinks.style.padding = '20px 24px';
+                navLinks.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
+                navLinks.style.gap = '18px';
+                navLinks.style.zIndex = '99';
+            }
+        });
+    </script>
+</body>
+</html>
